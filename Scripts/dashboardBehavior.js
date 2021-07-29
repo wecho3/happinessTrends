@@ -11,7 +11,7 @@ narrative = function(){
     const AvgLife = 64.99279866;
     const MarkerDefaultColor = "steelblue";
     const TrendLineDefaultColor = "gray"
-    const Margins = ({top: 25, right: 60, bottom: 25, left: 30});
+    const Margins = ({top: 25, right: 80, bottom: 25, left: 40});
     const Height = 600;
     const Width = parseInt(d3.select('#visual').style('width'));
     const SwatchSize = "15px";
@@ -20,15 +20,15 @@ narrative = function(){
     // Slide Information
     const SlideInfo = {
         1 : ["Overall Healthy Life Expectancy vs Logged GDP per Capita", 
-            "World Happines Report (WHR) has been collecting data on countries' happiness and the contributing factors since 2012. Of those factors, we have shown coutries wealth though log scale GDP per capita compared to the healthy life expenctancy for each country's latest data (mostly 2021). The size of the countries' marker is the happiness ladder score of the country, which includes the GDP per capita and healthy life expectancy as factors in that score."],
+            "World Happines Report (WHR) has been collecting data on countries' happiness and the contributing factors since 2012. Of those factors, we have shown coutries' wealth through log scale GDP per capita compared to the healthy life expectancy for each country's latest data (mostly 2021) as markers in the scatterplot. The size of the countries' marker is the happiness ladder score of the country, which includes the GDP per capita and healthy life expectancy as factors in that score. The happines score of the country includes more factors in its calculation, including social support, freedom of life choice, generosity, perceptions of corruption, and dystopia."],
         2 : ["Trending Values", 
             "A trendline is added showing the correlation between healthy life expectancy and GDP per capita. As shown in the graph, there is a fairly strong correlation between these factors, and the relationship between these factors is positive. Richer countries correlate with populations that live longer."],
         3 : ["Outliers", 
-            "We now show quadrants split by the average healthy life expectancy and average GDP per capita of the countries displayed. There are outliers in the general trend in both directions away from the trend line. There a couple of countries that have high life expectancy despite a low GDP per capita and low life expectancy despite a higher GDP per capita. This shows that although a general trend exists, GDP alone cannot determine the healthy life expectancy of a country alone."],
+            "We now show quadrants split by the average healthy life expectancy and average GDP per capita of the countries displayed. There are outliers in the general trend in both directions away from the trend line. There are a couple of countries that have high life expectancy despite a low GDP per capita and low life expectancy despite a higher GDP per capita. This shows that although a general trend exists, GDP alone cannot determine the healthy life expectancy of a country alone."],
         4 : ["Region Disparity", 
-            "Now, that we explored outliers in the general trend, we have categorized the countries according to their world regions to identify further outliers by geographic region. Each color shows a different region in the world. There are clear gatherings of groups of countries in the regions. Generally, the regions tend to cluster in similar wealth and healthy life expectancy. However, there are significant outliers in the regions that would not have been clear otherwise."],
+            "Now, that we explored outliers in the general trend, we will explore if outliers exist in similar areas of the world. The graph now shows countries according to their world regions by color to help explore outliers in these geographic region. Each color shows a different region in the world. Generally, the regions tend to cluster in similar wealth and healthy life expectancy. However, there are significant outliers in the regions that would have been difficult to find without this region highlighting. These outliers show that even though wealth and healthy life expectancies are similar in geographic areas, there are exceptions to be explored for additional analysis in this context. You can hover over the regions in the legend to highlight country markers in that region."],
         5 : ["Exceptions to Happiness", 
-            "In addition to the outliers in healthy life expectancy and GDP per capita and region, there are some exceptions in overall happiness as well. We have updated the color scale of the country markers to more easily identify the happiness score of the countries to show happiness by both color and size of the markers. Note that Bhutan's latest data is from 2015 because the of the lack of survery data available between 2016 and 2021. There is a general trend of happier countries in correlation to both increasing GDP per capita and healthy life expectancy. This trend is expected since they are major parts of the happiness score. However, you can see that there are outlier countries with lower happiness score despite high GDP per capita and healthy life expectancy."]
+            "In addition to the outliers already explored, there are some exceptions in overall happiness as well. We have updated the color scale of the country markers to more easily identify the happiness score of the countries. Happiness scores are now shown by both color and size of the markers. Note that Bhutan's latest data is from 2015 because of the lack of survery data available between 2016 and 2021. There is a general trend of happier countries in correlation to both increasing GDP per capita and healthy life expectancy. This trend is expected since these factors are major parts of the happiness score calculation. However, you can see that there are outlier countries with lower happiness score despite high GDP per capita and healthy life expectancy."]
     };
 
     //Annotation Data
@@ -73,6 +73,16 @@ narrative = function(){
             data: { gdpPerCapita: 9.065, healthyLifeExpectancy: 50.833 },
             dy: -1,
             dx: 20
+        },
+        { 
+            id: "A3d", 
+            note: {
+                title: "Hong Kong S.A.R. of China", 
+                label: "Higher life expectancy compared to other high GDP per capita"
+            },
+            data: { gdpPerCapita: 11.000, healthyLifeExpectancy: 76.82 },
+            dy: 10,
+            dx: -220
         },
         { 
             id: "A4a", 
@@ -644,7 +654,8 @@ narrative = function(){
         // tooltip group
         g.style("display", null)
             .style("pointer-events", "none")
-            .style("font", "10px sans-serif");
+            .style("font", "10px sans-serif")
+            .style("z-index", -10);
 
         // tooltip container stroke
         const path = g.selectAll("path")
@@ -654,20 +665,21 @@ narrative = function(){
                 .attr("stroke", "black");
 
         // tooltip content
-        const tooltipLabel = ["", "", "GDP Per Capita: ", "Life Expectancy: ", "Happiness Score: "];
+        const tooltipLabel = ["", "", "GDP Per Capita: ", "Life Expectancy: ", "Happiness Score: ", "GDP Score: ", "Social Support: ", "Life Expectancy: ", "Choice Freedom: ", "Generosity: ", "Corruption Perception: ", "Dystopia + Residual: "];
         const text = g.selectAll("text")
             .data([null])
             .join("text")
             .call(text => text
                 .selectAll("tspan")
-                .data([d.country, d.region, d.gdpPerCapita, d.healthyLifeExpectancy, d.ladder])
+                .data([d.country, d.region, d.gdpPerCapita, d.healthyLifeExpectancy, d.ladder, d.gdpPerCapitaScore, d.socialSupportScore, d.healthyLifeExpectancyScore, d.lifeChoiceFreedomScore, d.generosityScore, d.corruptionPerceptionScore, d.dystopiaScoreWResidual])
                 .join("tspan")
                 .attr("x", 0)
                 .attr("y", (d, i) => `${i * 1.2}em`)
                 .style("text-align", "center")
                 .style("font-weight", (_, i) => i ? null : "bold")
+                .attr("fill", (d, i) => i >= 5 ? d3.schemeCategory10[i - 5] : "")
                 .text((d, i) => tooltipLabel[i] + d));
-
+        
         // tooltip positioning
         const {x, y, width, height} = text.node().getBBox();
         text.attr("transform", 
@@ -675,6 +687,32 @@ narrative = function(){
                 `translate(${-width / 2},${y - height})` : 
                 `translate(${-width / 2},${15 - y})`
         );
+
+        const happinessScoreData = [d.gdpPerCapitaScore, d.socialSupportScore, d.healthyLifeExpectancyScore, d.lifeChoiceFreedomScore, 
+            d.generosityScore, d.corruptionPerceptionScore, d.dystopiaScoreWResidual];
+        var happinessScoreSumData = d3.cumsum(happinessScoreData);
+
+        //X (gdpPerCapita) scale function
+        var _xTScale = d3.scaleLinear()
+            // .domain([0, d.ladder])
+            .domain([0, 7.845])
+            .range([-width / 2, width / 2]);
+        var _xWScale = d3.scaleLinear()
+            // .domain([0, d.ladder])
+            .domain([0, 7.845])
+            .range([0, width]);
+
+        // tooltip happiness graph
+        const tgraph = g.append("g")
+            .selectAll("rect")
+            .data(happinessScoreSumData)
+            .enter()
+            .append("rect")
+            .attr("x", (d, i) => i == 0 ? _xTScale(0) : _xTScale(happinessScoreSumData[i - 1]))
+            .attr("y",_yScale(d.healthyLifeExpectancy) > Height/2 ? -10 : height + 20)
+            .attr("width", (d, i) => _xWScale(happinessScoreData[i]))
+            .attr("height", 10)
+            .attr("fill", (d, i) => d3.schemeCategory10[i]);
 
         // tooltip container path
         path.attr("d", 
