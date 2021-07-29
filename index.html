@@ -1,1 +1,71 @@
-<h1>Testing webpage on happiness!</h1>
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="./Styles/bootstrap.min.css">
+        <link rel="stylesheet" href="./Styles/dashboardStyles.css">
+    </head>
+    <body>
+        <div class="container gx-0">
+            <div class="row py-1">
+                <div class="col-12">
+                    <h1 id="title">Wealth and Longevity</h1>
+                </div>
+                <div class="col-12">
+                    <p id="subtitle">
+                        The affect of wealth on health and happiness and their outliers
+                    </p>
+                </div>
+            </div>
+
+            <div class="row py-1">
+                <div class="col-12">
+                    <div id="slideButtons" class="btn-toolbar" role="toolbar" aria-label="Toolbar for slide progression">
+                        <div class="btn-group me-2" role="group" aria-label="Previous slide">
+                            <button id="prev" type="button" class="btn btn-secondary" disabled>Prev</button>
+                        </div>
+                        <div id="slideButtonContainer" class="btn-group me-2" role="group" aria-label="Slide number buttons">
+                            <input type="radio" class="btn-check" name="btnradio" id="slide1" autocomplete="off" checked>
+                            <label class="btn btn-primary" for="slide1">1</label>
+                            
+                            <input type="radio" class="btn-check" name="btnradio" id="slide2" autocomplete="off">
+                            <label class="btn btn-primary" for="slide2">2</label>
+                            
+                            <input type="radio" class="btn-check" name="btnradio" id="slide3" autocomplete="off">
+                            <label class="btn btn-primary" for="slide3">3</label>
+
+                            <input type="radio" class="btn-check" name="btnradio" id="slide4" autocomplete="off">
+                            <label class="btn btn-primary" for="slide4">4</label>
+
+                            <input type="radio" class="btn-check" name="btnradio" id="slide5" autocomplete="off">
+                            <label class="btn btn-primary" for="slide5">5</label>
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Next slide">
+                            <button id="next" type="button" class="btn btn-secondary">Next</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 py-4 narrativeSection">
+                <div id="narrativeTitle" class="py-1"></div>
+                <div id="narrativeBody"></div>
+            </div>
+
+            <div class="row py-2">
+                <div id="visual" class="col-12">
+                    <div class="row">
+                        <svg id="graph"></svg>
+                    </div>
+                    <div id="regionLegend" class="row"></div>
+                    <div id="happinessLegend" class="row"></div>
+                </div>
+            </div>
+            
+        </div>
+    </body>
+    <script src="./Scripts/d3.min.js"></script>
+    <script src="./Scripts/d3-annotation.min.js"></script>
+    <script src="./Scripts/bootstrap.bundle.min.js"></script>
+    <script src="./Scripts/dashboardBehavior.js"></script>
+</html>
