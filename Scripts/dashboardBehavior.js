@@ -665,19 +665,19 @@ narrative = function(){
                 .attr("stroke", "black");
 
         // tooltip content
-        const tooltipLabel = ["", "", "GDP Per Capita: ", "Life Expectancy: ", "Happiness Score: ", "GDP Score: ", "Social Support: ", "Life Expectancy: ", "Choice Freedom: ", "Generosity: ", "Corruption Perception: ", "Dystopia + Residual: "];
+        const tooltipLabel = ["", "", "GDP Per Capita: ", "Life Expectancy: ", "Happiness Score: ", "Happiness Score Components", "GDP Score: ", "Social Support: ", "Life Expectancy: ", "Choice Freedom: ", "Generosity: ", "Corruption Perception: ", "Dystopia + Residual: "];
         const text = g.selectAll("text")
             .data([null])
             .join("text")
             .call(text => text
                 .selectAll("tspan")
-                .data([d.country, d.region, d.gdpPerCapita, d.healthyLifeExpectancy, d.ladder, d.gdpPerCapitaScore, d.socialSupportScore, d.healthyLifeExpectancyScore, d.lifeChoiceFreedomScore, d.generosityScore, d.corruptionPerceptionScore, d.dystopiaScoreWResidual])
+                .data([d.country, d.region, d.gdpPerCapita, d.healthyLifeExpectancy, d.ladder, "", d.gdpPerCapitaScore, d.socialSupportScore, d.healthyLifeExpectancyScore, d.lifeChoiceFreedomScore, d.generosityScore, d.corruptionPerceptionScore, d.dystopiaScoreWResidual])
                 .join("tspan")
                 .attr("x", 0)
                 .attr("y", (d, i) => `${i * 1.2}em`)
                 .style("text-align", "center")
-                .style("font-weight", (_, i) => i ? null : "bold")
-                .attr("fill", (d, i) => i >= 5 ? d3.schemeCategory10[i - 5] : "")
+                .style("font-weight", (d, i) => i == 0 ? "bold" : "")
+                .attr("fill", (d, i) => i >= 6 ? d3.schemeCategory10[i - 6] : "")
                 .text((d, i) => tooltipLabel[i] + d));
         
         // tooltip positioning
