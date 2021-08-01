@@ -20,15 +20,15 @@ narrative = function(){
     // Slide Information
     const SlideInfo = {
         1 : ["Overall Healthy Life Expectancy vs Logged GDP per Capita", 
-            "World Happines Report (WHR) has been collecting data on countries' happiness and the contributing factors since 2012. Of those factors, we have shown coutries' wealth through log scale GDP per capita compared to the healthy life expectancy for each country's latest data (mostly 2021) as markers in the scatterplot. The size of the countries' marker is the happiness ladder score of the country, which includes the GDP per capita and healthy life expectancy as factors in that score. The happines score of the country includes more factors in its calculation, including social support, freedom of life choice, generosity, perceptions of corruption, and dystopia."],
+            "World Happines Report (WHR) has been collecting data on countries' happiness and the contributing factors since 2012. Of those factors, we have shown coutries' wealth through log scale GDP per capita compared to the healthy life expectancy for each country's latest data (mostly 2021) as markers in the scatterplot. The size of the countries' marker is the happiness ladder score of the country, which includes the GDP per capita and healthy life expectancy as factors in that score. The happines score of the country includes more factors in its calculation, such as social support, freedom of life choice, generosity, perceptions of corruption, and dystopia."],
         2 : ["Trending Values", 
             "A trendline is added showing the correlation between healthy life expectancy and GDP per capita. As shown in the graph, there is a fairly strong correlation between these factors, and the relationship between these factors is positive. Richer countries correlate with populations that live longer."],
         3 : ["Outliers", 
-            "We now show quadrants split by the average healthy life expectancy and average GDP per capita of the countries displayed. There are outliers in the general trend in both directions away from the trend line. There are a couple of countries that have high life expectancy despite a low GDP per capita and low life expectancy despite a higher GDP per capita. This shows that although a general trend exists, GDP alone cannot determine the healthy life expectancy of a country alone."],
+            "We now show quadrants split by the average healthy life expectancy and average GDP per capita of the countries displayed. There are outliers in the general trend in both directions away from the trend line. There are a couple of countries that have high life expectancy despite a low GDP per capita and low life expectancy despite a higher GDP per capita. This shows that although a general trend exists, GDP alone cannot determine the healthy life expectancy of a country."],
         4 : ["Region Disparity", 
             "Now, that we explored outliers in the general trend, we will explore if outliers exist in similar areas of the world. The graph now shows countries according to their world regions by color to help explore outliers in these geographic region. Each color shows a different region in the world. Generally, the regions tend to cluster in similar wealth and healthy life expectancy. However, there are significant outliers in the regions that would have been difficult to find without this region highlighting. These outliers show that even though wealth and healthy life expectancies are similar in geographic areas, there are exceptions to be explored for additional analysis in this context. You can hover over the regions in the legend to highlight country markers in that region."],
         5 : ["Exceptions to Happiness", 
-            "In addition to the outliers already explored, there are some exceptions in overall happiness as well. We have updated the color scale of the country markers to more easily identify the happiness score of the countries. Happiness scores are now shown by both color and size of the markers. Note that Bhutan's latest data is from 2015 because of the lack of survery data available between 2016 and 2021. There is a general trend of happier countries in correlation to both increasing GDP per capita and healthy life expectancy. This trend is expected since these factors are major parts of the happiness score calculation. However, you can see that there are outlier countries with lower happiness score despite high GDP per capita and healthy life expectancy."]
+            "In addition to the outliers already explored, there are some exceptions in overall happiness as well. We have updated the color scale of the country markers to easily identify the happiness score of the countries. Happiness scores are now shown by both color and size of the markers. Note that Bhutan's latest data is from 2015 because of the lack of survery data available between 2016 and 2021. There is a general trend of happier countries in correlation to both increasing GDP per capita and healthy life expectancy. This trend is expected since these factors are major parts of the happiness score calculation. However, you can see that there are outlier countries with lower happiness score despite high GDP per capita and healthy life expectancy."]
     };
 
     //Annotation Data
@@ -82,7 +82,7 @@ narrative = function(){
             },
             data: { gdpPerCapita: 11.000, healthyLifeExpectancy: 76.82 },
             dy: 10,
-            dx: -220
+            dx: -280
         },
         { 
             id: "A4a", 
@@ -92,7 +92,7 @@ narrative = function(){
             },
             data: { gdpPerCapita: 11.488, healthyLifeExpectancy: 76.953 },
             dy: 10,
-            dx: -250
+            dx: -300
         },
         { 
             id: "A4b", 
